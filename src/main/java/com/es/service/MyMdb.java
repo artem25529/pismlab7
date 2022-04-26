@@ -8,6 +8,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,6 +28,36 @@ public class MyMdb implements MessageListener {
 
     @Override
     public void onMessage(Message message) {
+
+        TextMessage textMessage = (TextMessage) message;
+        try {
+            System.out.println("destination " + textMessage.getJMSDestination());
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+        try {
+            String text = textMessage.getText();
+            System.out.println("message: " + text);
+            System.out.println("jndi " + "jms/dest");
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /*@Override
+    public void onMessage(Message message) {
+        TextMessage textMessage = (TextMessage) message;
+        try {
+            String text = textMessage.getText();
+            Files.write(PATH, text.getBytes(StandardCharsets.UTF_8));
+        } catch (JMSException | IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+   /* @Override
+    public void onMessage(Message message) {
         TextMessage textMessage = (TextMessage) message;
         try {
             String text = textMessage.getText();
@@ -43,9 +74,9 @@ public class MyMdb implements MessageListener {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
-    /*@Override
+   /* @Override
     public void onMessage(Message message) {
         TextMessage textMessage = (TextMessage) message;
         try {
