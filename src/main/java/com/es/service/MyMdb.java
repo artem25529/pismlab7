@@ -26,7 +26,7 @@ public class MyMdb implements MessageListener {
     public static final Path LETTERS = Paths.get("E:\\Programs\\glassfish5\\Letters.txt");
     private List<String> messages = new ArrayList<>();
 
-    @Override
+    /*@Override
     public void onMessage(Message message) {
 
         TextMessage textMessage = (TextMessage) message;
@@ -43,18 +43,18 @@ public class MyMdb implements MessageListener {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
-    /*@Override
+    @Override
     public void onMessage(Message message) {
         TextMessage textMessage = (TextMessage) message;
         try {
             String text = textMessage.getText();
-            Files.write(PATH, text.getBytes(StandardCharsets.UTF_8));
+            Files.write(PATH, text.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
         } catch (JMSException | IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
    /* @Override
     public void onMessage(Message message) {
